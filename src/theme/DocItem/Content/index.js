@@ -1,9 +1,9 @@
-import React from 'react';
-import clsx from 'clsx';
-import {ThemeClassNames} from '@docusaurus/theme-common';
-import {useDoc} from '@docusaurus/theme-common/internal';
-import Heading from '@theme/Heading';
-import MDXContent from '@theme/MDXContent';
+import React from "react";
+import clsx from "clsx";
+import { ThemeClassNames } from "@docusaurus/theme-common";
+import { useDoc } from "@docusaurus/theme-common/internal";
+import Heading from "@theme/Heading";
+import MDXContent from "@theme/MDXContent";
 /**
  Title can be declared inside md content or declared through
  front matter and added manually. To make both cases consistent,
@@ -15,24 +15,33 @@ import MDXContent from '@theme/MDXContent';
  - the markdown content does not already contain a top-level h1 heading
 */
 function useSyntheticTitle() {
-  const {metadata, frontMatter, contentTitle} = useDoc();
+  const { metadata, frontMatter, contentTitle } = useDoc();
   const shouldRender =
-    !frontMatter.hide_title && typeof contentTitle === 'undefined';
+    !frontMatter.hide_title && typeof contentTitle === "undefined";
   if (!shouldRender) {
     return null;
   }
   return metadata.title;
 }
-export default function DocItemContent({children}) {
+export default function DocItemContent({ children }) {
+  const { frontMatter } = useDoc();
   const syntheticTitle = useSyntheticTitle();
+
+  const headingFromFrontMatter = frontMatter?.heading || "";
+  const descriptionFromFrontMatter = frontMatter?.description || "";
+
   return (
-    <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
+    <div className={clsx(ThemeClassNames.docs.docMarkdown, "markdown")}>
       {syntheticTitle && (
         <header>
           <Heading as="h1">{syntheticTitle}</Heading>
         </header>
       )}
-      <MDXContent>{children}</MDXContent>
+      <MDXContent>
+        {headingFromFrontMatter && <h2>{headingFromFrontMatter}</h2>}
+        {descriptionFromFrontMatter && <p>{descriptionFromFrontMatter}</p>}
+        {children}
+      </MDXContent>
     </div>
   );
 }
