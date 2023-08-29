@@ -27,8 +27,10 @@ export default function DocItemContent({ children }) {
   const { frontMatter } = useDoc();
   const syntheticTitle = useSyntheticTitle();
 
-  const headingFromFrontMatter = frontMatter?.heading || "";
-  const descriptionFromFrontMatter = frontMatter?.description || "";
+  const headingFromFM = frontMatter?.heading || "";
+  const descriptionFromFM = frontMatter?.description || "";
+  const wrappedHeadingFromFM = frontMatter?.wrappedHeading || "";
+  const wrappedDescriptionFromFM = frontMatter?.wrappedDescription || "";
 
   return (
     <div className={clsx(ThemeClassNames.docs.docMarkdown, "markdown")}>
@@ -37,9 +39,16 @@ export default function DocItemContent({ children }) {
           <Heading as="h1">{syntheticTitle}</Heading>
         </header>
       )}
+
       <MDXContent>
-        {headingFromFrontMatter && <h2>{headingFromFrontMatter}</h2>}
-        {descriptionFromFrontMatter && <p>{descriptionFromFrontMatter}</p>}
+        {headingFromFM && <h2>{headingFromFM}</h2>}
+        {descriptionFromFM && <p>{descriptionFromFM}</p>}
+
+        <div>
+          {wrappedHeadingFromFM && <h2>{wrappedHeadingFromFM}</h2>}
+          {wrappedDescriptionFromFM && <p>{wrappedDescriptionFromFM}</p>}
+        </div>
+
         {children}
       </MDXContent>
     </div>
