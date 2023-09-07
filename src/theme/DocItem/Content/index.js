@@ -4,6 +4,7 @@ import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDoc } from "@docusaurus/theme-common/internal";
 import Heading from "@theme/Heading";
 import MDXContent from "@theme/MDXContent";
+import { slugify } from "@site/src/util/string";
 /**
  Title can be declared inside md content or declared through
  front matter and added manually. To make both cases consistent,
@@ -30,6 +31,10 @@ export default function DocItemContent({ children }) {
   const headingFromFM = frontMatter?.heading || "";
   const descriptionFromFM = frontMatter?.description || "";
   const wrappedHeadingFromFM = frontMatter?.wrappedHeading || "";
+  const wrappedGrandChildHeadingFromFM =
+    frontMatter?.wrappedGrandChildHeading || "";
+  const wrappedIndentedHeadingFromFM =
+    frontMatter?.wrappedIndentedHeading || "";
   const wrappedDescriptionFromFM = frontMatter?.wrappedDescription || "";
 
   return (
@@ -39,14 +44,41 @@ export default function DocItemContent({ children }) {
           <Heading as="h1">{syntheticTitle}</Heading>
         </header>
       )}
-    {/* github repo test */}
+      {/* github repo test */}
       <MDXContent>
-        {headingFromFM && <h2>{headingFromFM}</h2>}
+        {headingFromFM && (
+          <h2 className="anchor" id={slugify(headingFromFM)}>
+            {headingFromFM}
+          </h2>
+        )}
         {descriptionFromFM && <p>{descriptionFromFM}</p>}
 
-        <div>
-          {wrappedHeadingFromFM && <h2>{wrappedHeadingFromFM}</h2>}
+        <div data-search-children>
+          {wrappedHeadingFromFM && (
+            <h2 className="anchor" id={slugify(wrappedHeadingFromFM)}>
+              {wrappedHeadingFromFM}
+            </h2>
+          )}
           {wrappedDescriptionFromFM && <p>{wrappedDescriptionFromFM}</p>}
+          <div>
+            {wrappedGrandChildHeadingFromFM && (
+              <h2
+                className="anchor"
+                id={slugify(wrappedGrandChildHeadingFromFM)}
+              >
+                {wrappedGrandChildHeadingFromFM}
+              </h2>
+            )}
+            <div>
+              <div>
+                <div>
+                  <div>
+                    {wrappedIndentedHeadingFromFM && <h2 className="anchor" id={slugify(wrappedIndentedHeadingFromFM)}>{wrappedIndentedHeadingFromFM}</h2>}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {children}
