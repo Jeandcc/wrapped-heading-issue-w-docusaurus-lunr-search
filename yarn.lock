@@ -3531,10 +3531,9 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-lunr-search@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/docusaurus-lunr-search/-/docusaurus-lunr-search-2.4.1.tgz#73419d4700cd69e3521525b20494fb31ba12b6c4"
-  integrity sha512-UOgaAypgO0iLyA1Hk4EThG/ofLm9/JldznzN98ZKr7TMYVjMZbAEaIBKLAUDFdfOPr9D5EswXdLn39/aRkwHMA==
+"docusaurus-lunr-search@https://github.com/MichelHMachado/docusaurus-lunr-search":
+  version "2.4.2"
+  resolved "https://github.com/MichelHMachado/docusaurus-lunr-search#f2806edb6b3afca1b19f79e682b9fd3da7c468fa"
   dependencies:
     autocomplete.js "^0.37.0"
     clsx "^1.2.1"
