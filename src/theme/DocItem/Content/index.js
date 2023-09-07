@@ -41,13 +41,17 @@ export default function DocItemContent({ children }) {
       )}
 
       <MDXContent>
-        {headingFromFM && <h2>{headingFromFM}</h2>}
-        {descriptionFromFM && <p>{descriptionFromFM}</p>}
+        {wrappedHeadingFromFM && (
+          <div data-search-children="true">
+            {headingFromFM && <h2>{headingFromFM}</h2>}
+            {descriptionFromFM && <p>{descriptionFromFM}</p>}
 
-        <div>
-          {wrappedHeadingFromFM && <h2>{wrappedHeadingFromFM}</h2>}
-          {wrappedDescriptionFromFM && <p>{wrappedDescriptionFromFM}</p>}
-        </div>
+            <div>
+              {wrappedHeadingFromFM && <h2>{wrappedHeadingFromFM}</h2>}
+              {wrappedDescriptionFromFM && <p>{wrappedDescriptionFromFM}</p>}
+            </div>
+          </div>
+        )}
 
         {children}
       </MDXContent>
